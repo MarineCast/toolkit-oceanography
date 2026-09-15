@@ -1,0 +1,156 @@
+# Environmental research inputs; prey is a separate domain.
+schema_version: 1
+area: model_area
+raw_dir: data/raw/environment/oceanographic
+processed_dir: data/processed/domain/environmental_layer/oceanographic
+report_dir: outputs/domains/environmental_layer/oceanographic
+support_dir: data/processed/domain/environmental_layer/seascape/spatial_support
+satellite_base: https://polarwatch.noaa.gov/erddap
+salish_base: https://salishsea.eos.ubc.ca/erddap
+current_u_dataset: ubcSSg3DuGridFields1hV21-11
+current_v_dataset: ubcSSg3DvGridFields1hV21-11
+current_geometry_dataset: ubcSSnBathymetryV21-08
+offshore_current_base: https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z
+tide_model_url: https://www.bio.gc.ca/science/research-recherche/ocean/webtide/Application/Install/InstData/Data/Unix/WebTide_ne_pac_data_0_7.sh
+current_interval_hours: 4
+# Sensitivity candidates, not calibrated transport distances. Kernels stop at 3 scales.
+tide_decay_km: [20, 40]
+river_decay_km: [10, 25, 50]
+kernel_cutoff_multiples: 3
+seed_snap_max_km: 8
+seed_shore_tolerance_m: 100
+mouth_coast_snap_max_m: 1000
+tide_coast_snap_max_m: 200
+productivity_window_days: 7
+productivity_min_valid_days: 1
+min_tide_samples: 24
+satellites:
+  ocean_temperature:
+    dataset: noaacwLEOACSPOSSTL3SCDaily
+    variable: sea_surface_temperature
+    units: degree_C
+    resolution: 6
+    quality_variable: quality_level
+    quality_min: 4
+    interpretation: Satellite surface temperature; retain quality levels 4 and 5. Cloud and coastal gaps remain missing.
+  productivity:
+    dataset: noaacwNPPVIIRSSQchlaDaily
+    variable: chlor_a
+    units: mg m^-3
+    resolution: 5
+    altitude: true
+    interpretation: Science-quality satellite chlorophyll biomass proxy, not primary production or prey. No gap filling.
+tides:
+  - {provider: CHS, station: '07120'} # Victoria
+  - {provider: CHS, station: '07735'} # Vancouver
+  - {provider: CHS, station: '07590'} # Tsawwassen
+  - {provider: CHS, station: '07895'} # Mitlenatch
+  - {provider: NOAA, station: '9443090'} # Neah Bay
+  - {provider: NOAA, station: '9444900'} # Port Townsend
+  - {provider: NOAA, station: '9447130'} # Seattle
+  - {provider: NOAA, station: '9449424'} # Cherry Point
+  - {provider: NOAA, station: '9449880'} # Friday Harbor
+rivers:
+  - provider: ECCC
+    station: 08MF005
+    name: Fraser River at Hope
+    mouth_lon: -123.27
+    mouth_lat: 49.10
+    mouth_reference: Approximate main Fraser estuary outlet near Steveston; upstream Hope flow excludes downstream tributaries and travel time.
+    mapping_status: research_approximate
+  - provider: ECCC
+    station: 08GA022
+    name: Squamish River near Brackendale
+    mouth_lon: -123.17
+    mouth_lat: 49.68
+    mouth_reference: Approximate Squamish estuary outlet in Howe Sound; excludes downstream tributaries.
+    mapping_status: research_approximate
+  - provider: ECCC
+    station: 08HA011
+    name: Cowichan River near Duncan
+    mouth_lon: -123.60
+    mouth_lat: 48.74
+    mouth_reference: Approximate Cowichan Bay estuary outlet; uncalibrated gauge-to-mouth transfer.
+    mapping_status: research_approximate
+  - provider: USGS
+    station: USGS-12200500
+    name: Skagit River near Mount Vernon
+    mouth_lon: -122.473053
+    mouth_lat: 48.363855
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_24270182, north fork only; no distributary allocation.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12150800
+    name: Snohomish River near Snohomish
+    mouth_lon: -122.209286
+    mouth_lat: 48.020034
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_24279018; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12045500
+    name: Elwha River at McDonald Bridge
+    mouth_lon: -123.558972
+    mouth_lat: 48.150589
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_23997022; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: ECCC
+    station: 08HB002
+    name: Englishman River near Parksville
+    mouth_lon: -124.274
+    mouth_lat: 49.325
+    mouth_reference: Approximate Englishman estuary outlet at Parksville; research mapping requires review.
+    mapping_status: research_approximate
+  - provider: ECCC
+    station: 08HB006
+    name: Puntledge River at Courtenay
+    mouth_lon: -124.986
+    mouth_lat: 49.668
+    mouth_reference: Approximate Courtenay estuary; Puntledge gauge excludes Tsolum contribution.
+    mapping_status: research_approximate
+  - provider: ECCC
+    station: 08HB034
+    name: Nanaimo River near Cassidy
+    mouth_lon: -123.88
+    mouth_lat: 49.144
+    mouth_reference: Approximate Nanaimo estuary outlet; research mapping requires review.
+    mapping_status: research_approximate
+  - provider: USGS
+    station: USGS-12213100
+    name: Nooksack River at Ferndale
+    mouth_lon: -122.599487
+    mouth_lat: 48.771032
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_23955760; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12089500
+    name: Nisqually River at McKenna
+    mouth_lon: -122.692502
+    mouth_lat: 47.100688
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_24281956; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12041200
+    name: Hoh River at US Highway 101
+    mouth_lon: -124.438560
+    mouth_lat: 47.750446
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_23838154; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12040500
+    name: Queets River near Clearwater
+    mouth_lon: -124.354887
+    mouth_lat: 47.544074
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_23844949; uncalibrated gauge-to-mouth transfer.
+    mapping_status: source_mouth
+  - provider: USGS
+    station: USGS-12039500
+    name: Quinault River at Quinault Lake
+    mouth_lon: -124.300421
+    mouth_lat: 47.349126
+    mouth_reference: RIVER_MOUTHS.parquet US_NHD_SMALL_SCALE_23844621; lake outlet gauge excludes substantial downstream catchment.
+    mapping_status: source_mouth
+
+# Remaining environmental roadmap (not collected by this workflow yet):
+# SST anomalies / marine heatwaves; tidal phase; salinity and freshwater plumes;
+# chlorophyll anomalies; turbidity, stratification, mixed-layer depth, upwelling;
+# sea-surface height; dissolved oxygen / hypoxia; harmful algal blooms.

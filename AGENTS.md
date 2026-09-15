@@ -4,8 +4,8 @@
 
 Ocean properties, currents, tides, waves, and related data products.
 
-This is an initial repository as inspected on 2026-09-15. No package, executable pipeline, or test
-suite is established yet. Inspect the checkout before assuming this snapshot is still current.
+This contains an incomplete research package extracted from OrcaCast on 2026-09-15.
+Read README.md, docs/SETUP.md and TODO.txt. Do not describe the extraction as production completion.
 Preserve unrelated changes and read deeper instructions before editing a subdirectory.
 
 ## Shared MarineCast context
@@ -45,6 +45,8 @@ is not zero, and environmental conditions are not species preference.
 ## Validation and completion
 
 For documentation-only work, inspect `git status --short` and the diff, verify references, and run
-`git diff --check` from this repository. There are currently no established package tests to run.
+`git diff --check` from this repository. Run `python -m pytest -q` after installing `.[test]`; check a regular wheel outside
+the checkout. Keep config/ and packaged resources synchronized. Live research runs require
+externally provisioned seascape support and separate validation.
 When adding executable behavior, add appropriate checks and document their exact commands here.
 Report tests actually run, unverified source acquisition, and any unrun integration paths.

@@ -1,0 +1,53 @@
+schema_version: 1
+catalog_id: oceanographic_research
+configuration: config/data/environment_oceanographic.yaml
+pipeline: oceanography
+availability_mode: retrospective_research
+forecast_eligible: false
+grain: [DATE, H3_INDEX]
+processed_root: data/processed/domain/environmental_layer/oceanographic
+output_pattern: '{family}/{date}/FEATURES.parquet'
+normalized_layer_pattern: '{family}/{date}/LAYER.parquet'
+normalized_station_pattern: '{family}/{date}/STATIONS.parquet'
+materialized_catalog_pattern: outputs/domains/environmental_layer/oceanographic/{start}_{end}/FEATURE_CATALOG.json
+families:
+  tides:
+    sources: [CHS astronomical predictions, NOAA CO-OPS astronomical predictions]
+    resolution: 6
+    source_resolution: station
+    transformation: Station hourly range -> normalized R8 water-path kernel -> water-area mean at R6
+    columns:
+      TIDE_RANGE_PROXY_M_20KM: {unit: m, scale_km: 20, role: candidate}
+      TIDE_RANGE_PROXY_M_40KM: {unit: m, scale_km: 40, role: candidate}
+  currents:
+    sources: [ubcSSg3DuGridFields1hV21-11, ubcSSg3DvGridFields1hV21-11, ubcSSnBathymetryV21-08]
+    resolution: 6
+    source_resolution: native curvilinear NEMO grid
+    transformation: Collocate staggered U/V -> speed -> six hourly-mean samples/day -> H3 native-point mean
+    columns:
+      CURRENT_SPEED_SAMPLE_MEAN_MS: {unit: m/s, role: candidate}
+      CURRENT_SPEED_SAMPLE_MAX_MEAN_MS: {unit: m/s, role: candidate, meaning: spatial mean of sampled native-point maxima}
+  river_discharge:
+    sources: [ECCC HYDAT, USGS daily means]
+    resolution: 6
+    source_resolution: station
+    transformation: Daily m3/s -> explicit estuary mouth -> summed R8 water-path decay -> water-area mean at R6
+    columns:
+      RIVER_DISCHARGE_INFLUENCE_M3_S_10KM: {unit: weighted m3/s, scale_km: 10, role: candidate}
+      RIVER_DISCHARGE_INFLUENCE_M3_S_25KM: {unit: weighted m3/s, scale_km: 25, role: candidate}
+      RIVER_DISCHARGE_INFLUENCE_M3_S_50KM: {unit: weighted m3/s, scale_km: 50, role: candidate}
+  ocean_temperature:
+    sources: [noaacwLEOACSPOSSTL3SCDaily]
+    resolution: 6
+    source_resolution: 0.02 degree
+    transformation: Quality 4-5 -> cos-latitude weighted valid pixel mean
+    columns:
+      SST_MEAN_C: {unit: degree_C, role: candidate}
+  productivity:
+    sources: [noaacwNPPVIIRSSQchlaDaily]
+    resolution: 5
+    source_resolution: approximately 4 km
+    transformation: Positive valid chlorophyll -> cos-latitude weighted native means
+    columns:
+      CHLOROPHYLL_MEAN_MG_M3: {unit: mg/m3, role: candidate}
+      CHLOROPHYLL_LOG_MEAN: {unit: 'natural log of concentration divided by 1 mg/m3', role: candidate}

@@ -1,0 +1,65 @@
+OCEANOGRAPHY TOOLKIT — INCOMPLETE RESEARCH IMPLEMENTATION
+Extraction: 2026-09-15. This file records unfinished work, not completed validation.
+
+P0 — Make standalone runs reproducible before calling this production-ready
+[ ] Define and validate the seascape product handoff. Current builds require R6/R8
+    support, R8 water-passable edges, and a territorial-water polygon beneath
+    support_dir; inspectors also need R6 water-clipped geometry. Add a preflight
+    that checks files, columns, CRS, key uniqueness, grid identity and provenance.
+    Do not copy seascape producers into this package or import sibling checkouts.
+[ ] Run a bounded collect/build/inspect replay with those inputs in a standalone
+    workspace, compare against preserved OrcaCast pilot artifacts, and record all
+    failed/partial/unavailable families. Existing source data has not moved.
+[ ] Audit failure reporting and CLI exit status. Some source failures are retained
+    as errors/missing rows. Define which failures must stop a requested run;
+    returning from the command must not silently mean every family succeeded.
+[ ] Add transactional publication of daily tables and their manifests, interrupted
+    write recovery, and tests proving failures preserve previous valid products.
+    Atomic individual JSON writes are not a multi-artifact release guarantee.
+[ ] Expand lineage coverage: build.py's explicit code-file list currently omits
+    normalization.py and copied configuration helpers. Specify portable source,
+    support and config fingerprints and validate them at every consumer boundary.
+[ ] Make feature_catalog.yaml reflect all seven implemented research families,
+    trailing composites, QC fields and actual output schemas. Keep research
+    candidates distinct from a production feature list or release certification.
+
+P1 — Complete scientific checks for existing capabilities
+[ ] Confirm current provider endpoints, rights, variable units, archive limits,
+    source dates, depth selection and wet masks using bounded live fixtures.
+    Do not shift provider dates or fill absent coverage with zero.
+[ ] Validate the DFO WebTide reconstruction against withheld tide stations. The
+    implementation uses UTide private APIs pinned to 0.3.1; add version/regression
+    checks. Preserve dateline normalization and rejection of outside, degenerate
+    or overlapping/disagreeing triangles. Do not snap unsupported points.
+[ ] Complete the weeklong HYCOM/DFO versus regional-current/station-tide comparison
+    and review rendered maps. Historical pilot summaries are not toolkit runs.
+[ ] Compare six sampled hourly-mean current snapshots with all 24 hourly means;
+    document bias in sample maxima. Keep SalishSeaCast and offshore HYCOM support
+    and vector conventions separate; do not describe speed as an east/north vector.
+[ ] Review approximate gauge-to-mouth mappings, missing catchments, distributary
+    allocation and the Neah Bay shoreline mismatch. Keep coastal-snap tolerances
+    explicit; do not widen them merely to make coverage appear complete.
+[ ] Evaluate tide/discharge influence scales and fine-grid water-area thresholds.
+    Kernels are research hypotheses, not calibrated transport or plume models.
+[ ] Evaluate seven-day trailing chlorophyll minimum coverage (config currently
+    permits one valid day). Preserve valid-day counts and observation ages; a
+    one-day observation is not a complete seven-day composite. Never use future data.
+[ ] Generalize or explicitly restrict spatial.py's EPSG:32610 regional projection
+    before supporting arbitrary geographic areas.
+[ ] Specify time aggregation and coverage thresholds for weekly application use.
+    Preserve each hydrometric provider's day definition and retrospective status.
+
+P2 — Research scope and maintenance
+[ ] Define requirements before implementing waves, salinity or additional ocean
+    properties. The organization scope is broader than today's seven families.
+[ ] Add anomalies/climatology only with an explicit reference period and leakage
+    controls. Forecast availability is unknown: keep AVAILABLE_AT_UTC null and
+    forecast_eligible false until an as-of availability contract is validated.
+[ ] Add bounded winter/summer backfills after provider and mapping checks; record
+    seasonal coverage differences before attempting the entire model date range.
+[ ] Improve module/API documentation and split large source modules only when
+    useful; retain existing formulas, row identity, units and missingness contracts.
+[ ] Wire OrcaCast or other applications to published toolkit products explicitly.
+    No application integration or ecological model acceptance is established here.
+[ ] Add CI with a fresh dependency install, Python 3.11+ runtime coverage, offline
+    fixtures and wheel smoke checks. Visually QA HTML interaction separately.

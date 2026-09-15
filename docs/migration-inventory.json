@@ -1,0 +1,138 @@
+{
+  "source_repository": "OrcaCast",
+  "source_revision": "577d19f7a9b742340e8a694b03354a04ec85b93b",
+  "files": [
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/DATA_SOURCES.md",
+      "destination": "docs/DATA_SOURCES.md",
+      "source_sha256": "427e6febd89a388e1d8d28c992b4e491e5decd5a86cd300e5253e6f5fee9c4ec",
+      "destination_sha256": "427e6febd89a388e1d8d28c992b4e491e5decd5a86cd300e5253e6f5fee9c4ec"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/README.md",
+      "destination": "docs/RESEARCH.md",
+      "source_sha256": "4bf08c2f13269cfb79c3d8fdbf40ae6018bcb6722484a63685d66379a1bfa7f8",
+      "destination_sha256": "7fa25d7fcdb0212c82e9560e21d3cd34a39f7e96d19dcb8e09c34f498dde52eb"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/__init__.py",
+      "destination": "src/oceanography/__init__.py",
+      "source_sha256": "8b3f9ab153b9325bdb0a07eb7930d73da43dc847cb682f2305ac40b43ce70926",
+      "destination_sha256": "ae21bb1c0340e4655484339393fbbf828765398b61cb9e15d38e84784186c333"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/__main__.py",
+      "destination": "src/oceanography/cli.py",
+      "source_sha256": "8037aa25e892be472cc376ed33af0487b7ad0d94abeef31cb2dd92c61c5fffdb",
+      "destination_sha256": "e69746b9fcbc03ded59ff2c7fbd741a71fc52420f683adebeea154f0452f4042"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/build.py",
+      "destination": "src/oceanography/build.py",
+      "source_sha256": "72836eeb9e4dd433c455c487bc22874872e0e7706632a88eb236647449edf312",
+      "destination_sha256": "72836eeb9e4dd433c455c487bc22874872e0e7706632a88eb236647449edf312"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/compare.py",
+      "destination": "src/oceanography/compare.py",
+      "source_sha256": "1ff7900ef52c5cdc04b4dafbafece762675e97d1547a2c2705db90ab8b5a8be7",
+      "destination_sha256": "1ff7900ef52c5cdc04b4dafbafece762675e97d1547a2c2705db90ab8b5a8be7"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/composite.py",
+      "destination": "src/oceanography/composite.py",
+      "source_sha256": "4cc953b35c225253e1edda024f159e692acf7471aedf09773d139ca495ccb12d",
+      "destination_sha256": "4cc953b35c225253e1edda024f159e692acf7471aedf09773d139ca495ccb12d"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/config.py",
+      "destination": "src/oceanography/config.py",
+      "source_sha256": "1b694417b6a80ddb00c8776faba0c4d69c00c09a4d849d20334af8a5616b5c75",
+      "destination_sha256": "696d3ca42e6edb40572c201f3dbb6eed8cbaff80bdf91f8370a571adc1fa9a4e"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/download.py",
+      "destination": "src/oceanography/download.py",
+      "source_sha256": "7690e486a966011f504b66007d57bc37aa2034c07f9a1fa89846eba8b885da09",
+      "destination_sha256": "5b349fb289a37de3b51c08500eed030b0a25d97baedccc5019b5aad72e96ae31"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/feature_catalog.yaml",
+      "destination": "config/feature_catalog.yaml",
+      "source_sha256": "8ef117daf0ee28dbe1c5619743b445a1a06f97faf6c5a8036a7abad20f31ecb9",
+      "destination_sha256": "9e58d6c405de58893afcceacfe5ccb980658a1c9c3a22f21b99314b0eb134355"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/inspect.py",
+      "destination": "src/oceanography/inspect.py",
+      "source_sha256": "74d585f41a338da03d25256ee4e086aada8f1df6a65dd68276035ca9a6832b97",
+      "destination_sha256": "af1f5adc7bb92d11ad30dfa8d6ff5bbc0ceb2b6999b8c5f946a9297bf0531c73"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/normalization.py",
+      "destination": "src/oceanography/normalization.py",
+      "source_sha256": "84241bfd7f2611fea9236b25496ed07e591a61882e6aeab2c3996f8835b77b64",
+      "destination_sha256": "84241bfd7f2611fea9236b25496ed07e591a61882e6aeab2c3996f8835b77b64"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/regional_sources.py",
+      "destination": "src/oceanography/regional_sources.py",
+      "source_sha256": "624418be138d71600f7e604d29f5af3f0996bfcc2e8b0ec6ff22d3b3950fe8b5",
+      "destination_sha256": "624418be138d71600f7e604d29f5af3f0996bfcc2e8b0ec6ff22d3b3950fe8b5"
+    },
+    {
+      "source": "src/orcacast/domains/environment/oceanographic/spatial.py",
+      "destination": "src/oceanography/spatial.py",
+      "source_sha256": "775de3c29e417ab390f52365044aaa20953852ba819265978b358429dd88814d",
+      "destination_sha256": "775de3c29e417ab390f52365044aaa20953852ba819265978b358429dd88814d"
+    },
+    {
+      "source": "tests/domains/environment/oceanographic/test_pipeline.py",
+      "destination": "tests/test_pipeline.py",
+      "source_sha256": "eca332e3b3ea9263bd48b744ecf00726178f420ada59a45c41e65485a8475eb5",
+      "destination_sha256": "3a32f52fdeae3cdac6b99ac1dddf9e1b88a4a173e066a6c3a38b05c97f6eeded"
+    },
+    {
+      "source": "config/common.yaml",
+      "destination": "config/common.yaml",
+      "source_sha256": "1b36892849b329f1b58961ab25d0cda6d615e9f01c9411a0e92c2bb9b023f352",
+      "destination_sha256": "1b36892849b329f1b58961ab25d0cda6d615e9f01c9411a0e92c2bb9b023f352"
+    },
+    {
+      "source": "config/data/environment_oceanographic.yaml",
+      "destination": "config/data/environment_oceanographic.yaml",
+      "source_sha256": "54f3996ce151828d38b4159b96db221cab0390356cf42a270e9ae5a523c2d579",
+      "destination_sha256": "54f3996ce151828d38b4159b96db221cab0390356cf42a270e9ae5a523c2d579"
+    },
+    {
+      "source": "docs/planning/oceanographic_environmental_pilot.md",
+      "destination": "docs/history/orcacast-pilot-2026-09-10.md",
+      "source_sha256": "e9b582bf8f4ceeb537a86e487d4dbbb6a432dc858de08e075ee14ac94c812f20",
+      "destination_sha256": "e733bcc81a36689cdef247b4cf7aee439c52c8a26ce1836df512c2ab1f5801f4"
+    },
+    {
+      "source": "src/orcacast/core/config/document.py",
+      "destination": "src/oceanography/core/config/document.py",
+      "source_sha256": "bc4973072f5473d54b596928895cc248fac26a0d15e19250a6689ae2c3e73726",
+      "destination_sha256": "bc4973072f5473d54b596928895cc248fac26a0d15e19250a6689ae2c3e73726"
+    },
+    {
+      "source": "src/orcacast/core/config/paths.py",
+      "destination": "src/oceanography/core/config/paths.py",
+      "source_sha256": "e13801efea5baaa399498c138e2eba449a5a23447182cccf716b622d58f13f54",
+      "destination_sha256": "8cb3b8a2663ef96278811b877104d64a8952637d09cacb2738997ba92d28510a"
+    },
+    {
+      "source": "src/orcacast/core/config/data.py",
+      "destination": "src/oceanography/core/config/data.py",
+      "source_sha256": "b81058cf95773a2cc2f17beb5a7032468262d0ac0ed65895d1e8364dcd1944b7",
+      "destination_sha256": "4512bd0cc2e051d8fa50afead646c32ab9b4591b866977674f9995395af2f706"
+    },
+    {
+      "source": "src/orcacast/core/config/common_areas.py",
+      "destination": "src/oceanography/core/config/common_areas.py",
+      "source_sha256": "3814045f05a32ee79a30c5f7b7f746c60173e72c9c42f43f87aa4a5113229bb0",
+      "destination_sha256": "82f5d125006badeb775f0db663d996395b1446150be4f8ca41378d17ed9c4355"
+    }
+  ]
+}
