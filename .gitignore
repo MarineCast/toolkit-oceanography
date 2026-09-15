@@ -8,3 +8,6 @@ dist/
 /data/
 /outputs/
 .DS_Store
+
+# Graphify generated code graph and local caches
+/graphify-out/
