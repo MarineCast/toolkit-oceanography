@@ -61,5 +61,6 @@ P2 — Research scope and maintenance
     useful; retain existing formulas, row identity, units and missingness contracts.
 [ ] Wire OrcaCast or other applications to published toolkit products explicitly.
     No application integration or ecological model acceptance is established here.
-[ ] Add CI with a fresh dependency install, Python 3.11+ runtime coverage, offline
-    fixtures and wheel smoke checks. Visually QA HTML interaction separately.
+[x] Add CI with fresh dependency installation, Python 3.11 and 3.14 runtime
+    coverage, offline fixtures and installed-wheel smoke checks. Live providers,
+    regional research runs and HTML interaction remain separate validation.

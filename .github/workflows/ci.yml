@@ -1,0 +1,50 @@
+name: Research package checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e '.[test]'
+      - run: python -m pip check
+      - run: python -m pytest -q
+      - run: oceanography --help
+      - run: python -m pip wheel . --no-deps --wheel-dir "$RUNNER_TEMP/dist"
+      - name: Installed wheel smoke test
+        run: |
+          wheel_env="$RUNNER_TEMP/wheel-env"
+          python -m venv --system-site-packages "$wheel_env"
+          "$wheel_env/bin/python" -m pip install \
+            --force-reinstall --no-deps "$RUNNER_TEMP"/dist/*.whl
+          outside="$RUNNER_TEMP/wheel-smoke"
+          workspace="$RUNNER_TEMP/oceanography-workspace"
+          mkdir -p "$outside"
+          cd "$outside"
+          "$wheel_env/bin/python" - <<'PY'
+          from importlib.resources import files
+
+          import oceanography
+          import oceanography.build
+          import oceanography.core.config
+
+          root = files("oceanography")
+          required = (
+              "resources/config/common.yaml",
+              "resources/config/data/environment_oceanographic.yaml",
+              "resources/config/feature_catalog.yaml",
+          )
+          assert all(root.joinpath(*path.split("/")).is_file() for path in required)
+          PY
+          "$wheel_env/bin/oceanography" --help
+          "$wheel_env/bin/oceanography" init --workspace "$workspace"
+          test -f "$workspace/config/common.yaml"
+      - run: git diff --check
