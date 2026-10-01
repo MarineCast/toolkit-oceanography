@@ -1,6 +1,6 @@
-![Ink cross-section of ocean currents with a buoy and research vessel](docs/assets/oceanography-toolkit-banner.png)
-
 # Oceanography Toolkit
+
+<img src="docs/assets/oceanography-toolkit-banner.png" alt="Ink cross-section of ocean currents with a buoy and research vessel" width="100%">
 
 **Incomplete research implementation.** Extracted from OrcaCast into the installable
 `toolkit-oceanography` distribution, with Python package and command `oceanography`.
