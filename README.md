@@ -1,3 +1,5 @@
+![Ink cross-section of ocean currents with a buoy and research vessel](docs/assets/oceanography-toolkit-banner.png)
+
 # Oceanography Toolkit
 
 **Incomplete research implementation.** Extracted from OrcaCast into the installable
