@@ -57,7 +57,7 @@ def water_distances(doc, cfg, seeds):
     )
     tree = cKDTree(np.column_stack([x[eligible], y[eligible]]))
     water_frame = gpd.read_parquet(
-        root / "water_geometry/TERRITORIAL_WATER_POLYGON.parquet"
+        root / getattr(cfg, "water_polygon_relative_path", "water_geometry/TERRITORIAL_WATER_POLYGON.parquet")
     ).to_crs(4326)
     b = cfg.bbox
     water_frame.geometry = water_frame.geometry.intersection(

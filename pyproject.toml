@@ -16,6 +16,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+waves = ["numcodecs>=0.16,<0.17"]
+waves-regional = ["h5py==3.15.1"]
+liveocean = ["h5py==3.15.1"]
+copernicus = ["numcodecs>=0.16,<0.17"]
 tides = ["utide==0.3.1"]
 test = ["pytest>=8"]
 

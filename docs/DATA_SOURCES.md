@@ -11,6 +11,15 @@ before redistribution; no source datasets are bundled with the toolkit.
 
 ## Original pilot sources
 
+The separate [Waves source contract](WAVES.md) was live-checked on 2026-11-01:
+official ECMWF ERA5 ARCO wave fields `swh`/`mwp`/`mwd`, parameters
+140229/140232/140230, at 0.5° and exact hourly instantaneous times through
+2026-10-26 23:00 UTC. Bulk direction is FROM under the archived-parameter
+convention. CC BY 4.0 / Copernicus and ECMWF attribution applies. Recent
+ERA5/ERA5T revision identity and historical availability are unknown. Native
+coastal gaps remain null; sea state is a derived WMO-height category. This current
+check does not refresh the older sources below.
+
 Source discovery and public API collection were exercised on 2026-09-10. Raw request manifests retain exact URLs, retrieval times, byte counts, and hashes. The executed initial pilot is 2024-07-01 through 2024-07-03, not the full archives below.
 
 | Source | Access and scope | Availability and rights |
@@ -39,3 +48,13 @@ See [regional_sources.py](../src/oceanography/regional_sources.py) for executabl
 validation logic and [configuration](CONFIGURATION.md) for the checked-in settings. These two
 families extend the initial five-family pilot description. Their presence in code is not evidence
 of a newly completed comparison, production coverage or current provider availability.
+
+## Ocean Conditions sources (2026-10-26)
+
+The separate daily/history workflow uses NOAA CoastWatch ERDDAP `jplMURSST41` (`analysed_sst`, degree_C), MUR v4.1 daily 0.01-degree gap-filled foundation SST, and `erdMH1chla1day_R2022SQ` (`chlor_a`, mg m-3), MODIS Aqua R2022 science-quality daily chlorophyll at about 4.6 km. History also uses `erdMH1chla1day_R2022NRT` (`chlorophyll`, mg m-3) only when SQ has no native date. The different NRT variable name is intentional. No source acquisition is inferred from metadata alone.
+
+Live metadata/time axes checked on 2026-10-26 ended 2026-10-25 for MUR/NRT and 2026-05-30 for SQ. The frozen history plan records actual dates, including earlier SQ gaps supplied by NRT; this is not a uniform final-quality chlorophyll record. See [Ocean Conditions](DAILY.md) and [history](HISTORY.md) for support, exact source receipts, scientific limits and execution evidence. These sources do not change the legacy ACSPO/VIIRS research configuration.
+
+## Surface model pilots (2026-10-27)
+
+See [HYCOM surface qualification](COARSE.md) and [SalishSeaCast inland qualification](REGIONAL.md) for executed source identities, native depths, units, geographic-vector processing, rights and explicit limits. They extend Ocean Conditions without changing legacy research adapters. Historical model backfill and any coarse/regional mosaic remain unvalidated.

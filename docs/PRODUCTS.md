@@ -24,6 +24,59 @@ support mapping. R5-to-R6 parent assignment does not create finer observations.
 
 ## Artifact layout
 
+The separate [Waves pipeline](WAVES.md) delivers R5-keyed hourly instantaneous
+significant wave height (m), mean period (s), mean direction (degrees FROM true
+north), and derived WMO sea state. Daily statistics require complete per-quantity
+UTC support and use circular direction. Every approved key remains present;
+cells without a retained native wet centre stay null. Two Parquets and a required
+catalog live in `Data/Oceanography/waves/`, independently of the legacy families
+and other surface products. No forecast or ecological eligibility is implied.
+
+The separate [regional Waves products](WAVES_REGIONAL.md) retain source-specific
+native cadence, period definitions and support counts. SSC half-hourly T02/FROM
+fields live in `Data/Oceanography/waves-salishseacast/` after validated full-run
+promotion. USGS hourly source-Tm fields are reserved for
+`Data/Oceanography/waves-usgs-nearshore/`; effective-coordinate qualification
+currently blocks publication, and unresolved direction stays null. Both have
+native/daily/support Parquets and a required catalog; all requested dates/R5 keys
+remain present. Existing ERA5 values are never replaced or silently mosaicked.
+
+The [LiveOcean surface scalar history](LIVEOCEAN.md) produces separate daily-labelled
+R6 reference salinity, dissolved oxygen and nitrate Parquets with a shared lineage
+companion. Values are 71-hour Godin-filtered surface model estimates, not 24-hour
+UTC means or an implemented SSC/LO numeric mosaic. Native unsupported cells stay
+null; generated source and month intermediates are removed after final readback.
+
+The bounded [SSC Godin timing pilot](REGIONAL_FILTERED.md) adds separate R6
+surface reference salinity, oxygen and nitrate Parquets, a final H3 phase-comparison
+Parquet and required provenance. Its exact 71-tap values centre at 12:30 UTC on
+SSC's hourly-mean axis; interpolation to LO's noon centre has 72 effective inputs
+and an extra alignment filter. Neither variant is a 24-hour mean. It does not
+activate a historical or mixed-model product or replace legacy checkpoints.
+
+The user-selected [inner-water modes](REGIONAL_HYBRID_PLAN.md) are source
+policies: `fast` uses LO where supported and SSC fallback; `complete` uses SSC
+throughout inner waters. Outer-coast sources can be reused independently in both
+modes, with existing GLORYS12 salinity/currents the low-effort default. These names
+do not certify full coverage. The [surface-history runner](SURFACE_HISTORY.md)
+implements the scalar choices over explicit regional support, producing final
+monthly partitions of daily R6 values and per-cell/date source companions.
+Geographic inner/outer mosaicing and currents are separate workflows. Preserve
+native resolution, source-specific units/statistics and missingness. The existing
+502-cell salinity gap target is not a full inner-water delivery.
+
+The separate [regional LO salinity extension](REGIONAL_SUBSETS.md) retains the
+same source noon Godin statistic and SR units over the expanded regional target.
+Its monthly final H3 partitions and required manifest/provenance supplement the
+old gap-only product; existing values must agree exactly. It does not reprocess
+oxygen/nitrate or certify geographic inner-water completeness.
+
+The source-specific [regional gap history](REGIONAL_GAP_HISTORY.md) has separate
+daily R6 salinity/current tables and required lineage companions. Its reference
+salinity and mean hourly-vector speed retain their native meanings; these are
+additive GLORYS spatial-gap supplements, not replacements for the research-family
+schemas above or a numeric cross-source mosaic.
+
 Paths below are relative to the configured roots:
 
 | Root | Artifact | Purpose |

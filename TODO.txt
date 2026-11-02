@@ -1,6 +1,10 @@
 OCEANOGRAPHY TOOLKIT — INCOMPLETE RESEARCH IMPLEMENTATION
 Extraction: 2026-09-15. This file records unfinished work, not completed validation.
 
+The separate Ocean Conditions satellite workflow is documented in docs/DAILY.md
+and docs/HISTORY.md. Its study-registry preflight, simple delivery and publication
+checks do not close the legacy seven-family routing/build tasks below.
+
 P0 — Make standalone runs reproducible before calling this production-ready
 [ ] Define and validate the seascape product handoff. Current builds require R6/R8
     support, R8 water-passable edges, and a territorial-water polygon beneath
@@ -50,8 +54,12 @@ P1 — Complete scientific checks for existing capabilities
     Preserve each hydrometric provider's day definition and retrospective status.
 
 P2 — Research scope and maintenance
-[ ] Define requirements before implementing waves, salinity or additional ocean
-    properties. The organization scope is broader than today's seven families.
+[x] Define and implement a separate ERA5 Waves history contract (docs/WAVES.md),
+    generated 2009-01-01–2026-10-26 on 2026-11-01 with unsupported cells null.
+[ ] Qualify independent coastal-wave accuracy and ecological/application use;
+    the Waves source/software checks do not close these research decisions.
+[ ] Define requirements before adding further ocean properties. Source-specific
+    salinity products retain their own contracts beyond the legacy seven families.
 [ ] Add anomalies/climatology only with an explicit reference period and leakage
     controls. Forecast availability is unknown: keep AVAILABLE_AT_UTC null and
     forecast_eligible false until an as-of availability contract is validated.
@@ -64,3 +72,12 @@ P2 — Research scope and maintenance
 [x] Add CI with fresh dependency installation, Python 3.11 and 3.14 runtime
     coverage, offline fixtures and installed-wheel smoke checks. Live providers,
     regional research runs and HTML interaction remain separate validation.
+
+SURFACE MODEL PILOTS — 2026-10-27
+[x] Qualify and publish bounded HYCOM salinity/geographic current pilot at R5.
+[x] Qualify and publish separate SalishSeaCast reference salinity/rotated current pilot at R6.
+[ ] Resolve reliable historical HYCOM subset runtime and validate all experiment seams/native axes before bulk acquisition.
+[ ] Complete app-owner acceptance of the four new pilot products; no source mosaic is applied.
+[ ] Turn the bounded regional acquisition evidence script into a general resumable source-qualified command before historical regional runs.
+
+2026-10-29: GLORYS12 anonymous three-day surface pilot staged and validated; 245/463 R5 cells supported, most Puget cells null, no tidal constituents. See docs/GLORYS.md. No full-history run or promotion.

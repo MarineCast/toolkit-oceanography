@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import sys
 from pathlib import Path
 from importlib.resources import files
 
@@ -51,7 +52,32 @@ def initialize_workspace(root):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'waves-salishseacast':
+        from .waves_ssc import main as implementation
+        return implementation(argv[1:])
+    if argv and argv[0] == 'waves-usgs-nearshore':
+        from .waves_usgs import main as implementation
+        return implementation(argv[1:])
+    if argv and argv[0] == 'waves':
+        from .waves import main as waves_main
+        return waves_main(argv[1:])
+    if argv and argv[0] == 'liveocean-salinity-extension':
+        from .liveocean_salinity import main as extension_main
+        return extension_main(argv[1:])
+    if argv and argv[0] == 'surface-history':
+        from .surface_history import main as surface_main
+        return surface_main(argv[1:])
+    if argv and argv[0] == 'regional-filtered-pilot':
+        from .regional_filtered import main as filtered_main
+        return filtered_main(argv[1:])
+    if argv and argv[0] == 'liveocean-history':
+        from .liveocean import main as liveocean_main
+        return liveocean_main(argv[1:])
+    if argv and argv[0] == 'regional-history':
+        from .regional_gap_history import main as regional_main
+        return regional_main(argv[1:])
+    parser = argparse.ArgumentParser(description=__doc__, epilog='Monthly gap history: oceanography regional-history --help')
     parser.add_argument("command", choices=["init", "collect", "build", "inspect", "compare", "run"])
     parser.add_argument("--workspace", type=Path, help="Configuration and data root")
     parser.add_argument("--config", default=DEFAULT_CONFIG)
