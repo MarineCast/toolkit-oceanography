@@ -196,3 +196,39 @@ Primary sources: [USGS release](https://doi.org/10.5066/P14VOPEY),
 [SSC wave-file inventory metadata](https://salishsea.eos.ubc.ca/erddap/info/ubcSSWaveWatch3-SoGFilesV17-02/index.html).
 USGS is CC0 with attribution; SSC results use Apache 2.0 with SalishSeaCast/UBC/
 DFO IOS attribution. These are model outputs, not buoy observations.
+
+
+## Bathymetry follow-up — 2026-11-02
+
+The user suggested checking retained bathymetry for the missing USGS mapping.
+The current `Data/Seascape/bathymetry-r6-static.parquet` and R8 companion are H3
+cell summaries, with no USGS wave-station identity or effective-coordinate table.
+Their embedded source context identifies GEBCO 2026 at 15 arc seconds. The retained
+native raster is a single-band WGS84 elevation grid (positive up, meters relative
+to sea level); the derived product declares positive-down depth. Its constituent
+vertical datums have the source's documented limitations. A 10 m depth level is
+not a 10 m horizontal-location tolerance.
+
+The underlying [wave-model method, section 3.2.2](https://eartharxiv.org/repository/object/5141/download/10171/)
+merges finer USGS/NOAA/BC DEMs with GEBCO, then averages/interpolates onto model
+grids; the [2026 method](https://egusphere.copernicus.org/preprints/2026/egusphere-2026-3369/egusphere-2026-3369.pdf)
+builds on that hybrid framework. The inspected public method does not identify
+our retained GEBCO raster as the release-specific wave output grid. Consequently,
+a nearest 10 m contour extracted from this raster would be an inferred location,
+not a verified reconstruction of the station-to-model-grid lookup. The inspected
+products, bathymetry cache and retained USGS qualification contain no qualifying
+mapping; this is not an exhaustive absence claim about all public archives.
+
+The current raw GeoTIFF checksum matches the retained October 29 reproduction
+candidate, but differs from the source checksum embedded in the canonical H3
+product. This byte-vintage difference was recorded, without inferring corruption
+or asserting current numerical parity. Sources, canonical bathymetry and wave
+values were preserved; no source migration or new mapping was produced.
+
+USGS publication therefore remains gated. An authoritative effective-coordinate
+table can satisfy the gate; a validated reconstruction would instead require the
+exact release-specific model grid/bathymetry, datum, wet mask and station selection
+rule or lookup. Unsupported support remains null. The SSC worker remains queued
+behind the existing acquisition owner. Evidence and the bounded read-only replay
+are retained locally at `Reports/oceanography-waves-bathymetry-2026-11-02/`.
+This was source/document qualification; pipeline code and datasets were unchanged.
