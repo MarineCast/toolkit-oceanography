@@ -12,6 +12,13 @@ python -m pytest -q
 git diff --check
 ```
 
+The `test` extra includes the pinned HDF5 reader (`h5py==3.15.1`) and supported
+compression codecs (`numcodecs>=0.16,<0.17`) used by regional Waves, LiveOcean and
+GLORYS fixtures. These remain optional for runtime-only installs. CI verifies both
+imports before collection, then reruns the offline suite against the regular wheel
+from outside the checkout on Python 3.11 and 3.14. This exercises codec-dependent
+fixtures rather than treating missing optional fixture libraries as successful coverage.
+
 The extraction recorded 17 passing tests on Python 3.14: 13 scientific fixtures and four package
 checks. This is a dated result, not a claim that arbitrary future changes pass. See
 [MIGRATION.md](MIGRATION.md) for the exact scope and unrun checks.
